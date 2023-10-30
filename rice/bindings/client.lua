@@ -13,8 +13,8 @@ local mebox = require("widget.mebox")
 local client_bindings = {
 
     binding.new {
-        modifiers = { mod.super, mod.control },
-        triggers = "Escape",
+        modifiers = { mod.super, mod.shift },
+        triggers = "`",
         path = "Client",
         description = "Quit",
         order = 0,
@@ -57,7 +57,7 @@ local client_bindings = {
     },
 
     binding.new {
-        modifiers = { mod.super, mod.shift },
+        modifiers = { mod.super, mod.control, mod.alt },
         triggers = binding.group.numrow,
         path = { "Tag", "Client" },
         description = "Move to tag",
@@ -103,12 +103,21 @@ local client_bindings = {
     },
 
     binding.new {
-        modifiers = { mod.shift, mod.super },
+        modifiers = { mod.super, mod.control, mod.alt },
         triggers = binding.group.arrows,
         path = "Client",
         description = "Move",
         on_press = function(trigger, client) cclient.move(client, trigger.direction) end,
     },
+
+    -- JSF: TODO Find a way to enable "Move client to master"
+    -- binding.new {
+    --     modifiers = { mod.super, mod.control, mod.alt },
+    --     triggers = "Return",
+    --     path = "Client",
+    --     description = "Move to Master",
+    --     on_press = function(trigger, client) cclient.swap(awful.client.getmaster()) end,
+    -- },
 
     binding.new {
         modifiers = { mod.control, mod.shift, mod.super },
@@ -198,7 +207,7 @@ local client_bindings = {
 
 
     binding.new {
-        modifiers = { mod.super, mod.shift },
+        modifiers = { mod.super, mod.control },
         triggers = "s",
         path = { "Tag", "Client" },
         description = "Keep on all tags (sticky)",
