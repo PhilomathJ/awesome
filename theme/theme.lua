@@ -912,19 +912,19 @@ theme.layouts = {
     },
     cornernw = {
         text = "Corner-NW",
-        icon = config.places.theme .. "/icons/layouts/cornernw-png",
+        icon = config.places.theme .. "/icons/layouts/cornernw.png",
     },
     cornerne = {
         text = "Corner-NE",
-        icon = config.places.theme .. "/icons/layouts/cornerne-png",
+        icon = config.places.theme .. "/icons/layouts/cornerne.png",
     },
     cornersw = {
         text = "Corner-SW",
-        icon = config.places.theme .. "/icons/layouts/cornersw-png",
+        icon = config.places.theme .. "/icons/layouts/cornersw.png",
     },
     cornerse = {
         text = "Corner-SE",
-        icon = config.places.theme .. "/icons/layouts/cornerse-png",
+        icon = config.places.theme .. "/icons/layouts/cornerse.png",
     },
 }
 
