@@ -95,8 +95,8 @@ local global_bindings = {
 
 
     binding.new {
-        modifiers = { mod.super },
-        triggers = "a",
+        modifiers = { mod.alt },
+        triggers = "space",
         path = "Launcher",
         description = "Launcher",
         on_press = function() awful.spawn(config.actions.show_launcher) end,
@@ -127,7 +127,7 @@ local global_bindings = {
     },
 
     binding.new {
-        modifiers = { mod.control, mod.super },
+        modifiers = { mod.shift, mod.super },
         triggers = "b",
         path = "Launcher",
         description = "Web browser (incognito)",
