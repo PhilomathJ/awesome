@@ -38,11 +38,11 @@ local terminal_execute = terminal .. " -e "
 
 config.apps = {
     shell = "bash",
-    terminal = terminal,
-    editor = terminal_execute .. "micro",
-    browser = "librewolf",
-    private_browser = "librewolf --private-window",
-    file_manager = terminal_execute .. "lf",
+    terminal = "konsole",
+    editor = terminal_execute .. "nano",
+    browser = "thorium-browser",
+    private_browser = "thorium-browser --private-window",
+    file_manager = "dolphin",
     calculator = "speedcrunch",
     mixer = terminal_execute .. "pulsemixer",
     bluetooth_control = terminal_execute .. "bluetoothctl",
