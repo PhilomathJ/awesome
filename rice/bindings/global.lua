@@ -153,7 +153,23 @@ local global_bindings = {
 
     binding.new {
         modifiers = { mod.super, mod.control },
-        triggers = binding.group.arrows_vertical,
+        triggers = "space",
+        path = "Layout",
+        description = "Select next layout",
+        on_press = function() awful.layout.inc(1) end,
+    },
+
+    binding.new {
+        modifiers = { mod.shift, mod.super, mod.control },
+        triggers = "space",
+        path = "Layout",
+        description = "Select previous layout",
+        on_press = function() awful.layout.inc(-1) end,
+    },
+
+    binding.new {
+        modifiers = { mod.super, mod.control },
+        triggers = binding.group.vim_updown,
         path = "Layout",
         description = "Change the number of primary clients",
         on_press = function(trigger) awful.tag.incnmaster(trigger.y, nil, true) end,
@@ -161,7 +177,7 @@ local global_bindings = {
 
     binding.new {
         modifiers = { mod.super, mod.control },
-        triggers = binding.group.arrows_horizontal,
+        triggers = binding.group.vim_leftright,
         path = "Layout",
         description = "Change the number of secondary columns",
         on_press = function(trigger) awful.tag.incncol(trigger.x, nil, true) end,
@@ -215,8 +231,8 @@ local global_bindings = {
     binding.new {
         modifiers = { mod.super },
         triggers = {
-            { trigger = ",", action = awful.tag.viewprev },
-            { trigger = ".", action = awful.tag.viewnext },
+            { trigger = "Left", action = awful.tag.viewprev },
+            { trigger = "Right", action = awful.tag.viewnext },
         },
         path = "Tag",
         description = "View previous/next tag",
@@ -418,7 +434,7 @@ local global_bindings = {
 
 
     binding.new {
-        modifiers = { mod.super },
+        modifiers = { mod.super, mod.control },
         triggers = binding.group.arrows,
         path = "Client",
         description = "Change focus",
