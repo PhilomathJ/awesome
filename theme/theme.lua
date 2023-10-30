@@ -849,19 +849,67 @@ end
 theme.layouts = {
     tiling = {
         text = "Tiling",
-        icon = config.places.theme .. "/icons/layouts/tiling.right.svg",
+        icon = config.places.theme .. "/icons/layouts/tile.png",
     },
     floating = {
         text = "Floating",
-        icon = config.places.theme .. "/icons/layouts/floating.svg",
+        icon = config.places.theme .. "/icons/layouts/floating.png",
     },
     max = {
         text = "Maximize",
-        icon = config.places.theme .. "/icons/layouts/max.svg",
+        icon = config.places.theme .. "/icons/layouts/max.png",
     },
     fullscreen = {
         text = "Fullscreen",
-        icon = config.places.theme .. "/icons/layouts/fullscreen.svg",
+        icon = config.places.theme .. "/icons/layouts/fullscreen.png",
+    },
+    tileleft = {
+        text = "Tile-Left",
+        icon = config.places.theme .. "/icons/layouts/tileleft.png",
+    },
+    tilebottom = {
+        text = "Tile-Bottom",
+        icon = config.places.theme .. "/icons/layouts/tilebottom.png",
+    },
+    tiletop = {
+        text = "Tile-Top",
+        icon = config.places.theme .. "/icons/layouts/tiletop.png",
+    },
+    fairv = {
+        text = "Fair-Vertical",
+        icon = config.places.theme .. "/icons/layouts/fairv.png",
+    },
+    fairh = {
+        text = "Fair-Horizontal",
+        icon = config.places.theme .. "/icons/layouts/fairh.png",
+    },
+    spiral = {
+        text = "Spiral",
+        icon = config.places.theme .. "/icons/layouts/spiral.png",
+    },
+    spiraldwindle = {
+        text = "Spiral-Dwindle",
+        icon = config.places.theme .. "/icons/layouts/dwindle.png",
+    },
+    magnifier = {
+        text = "Magnifier",
+        icon = config.places.theme .. "/icons/layouts/magnifier.png",
+    },
+    cornernw = {
+        text = "Corner-NW",
+        icon = config.places.theme .. "/icons/layouts/cornernw-png",
+    },
+    cornerne = {
+        text = "Corner-NE",
+        icon = config.places.theme .. "/icons/layouts/cornerne-png",
+    },
+    cornersw = {
+        text = "Corner-SW",
+        icon = config.places.theme .. "/icons/layouts/cornersw-png",
+    },
+    cornerse = {
+        text = "Corner-SE",
+        icon = config.places.theme .. "/icons/layouts/cornerse-png",
     },
 }
 
