@@ -5,6 +5,7 @@ local cclient = require("core.client")
 local binding = require("core.binding")
 local mod = binding.modifier
 local btn = binding.button
+local key = binding.key
 local services = require("services")
 local main_menu = require("ui.menu.main")
 local gtable = require("gears.table")
@@ -125,8 +126,8 @@ local global_bindings = {
     },
 
     binding.new {
-        modifiers = {},
-        triggers = "XF86Calculator",
+        modifiers = {mod.super},
+        triggers = key.scrolllock,
         path = "Launcher",
         description = "Calculator",
         on_press = function() awful.spawn(config.apps.calculator) end,
