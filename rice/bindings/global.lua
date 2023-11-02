@@ -135,8 +135,8 @@ local global_bindings = {
     },
 
     binding.new {
-        modifiers = {},
-        triggers = "XF86Calculator",
+        modifiers = {mod.super},
+        triggers = key.scrolllock,
         path = "Launcher",
         description = "Calculator",
         on_press = function() awful.spawn(config.apps.calculator) end,
