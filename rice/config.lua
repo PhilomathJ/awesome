@@ -29,21 +29,21 @@ local terminal = "alacritty"
 local terminal_execute = terminal .. " -e "
 
 config.apps = {
-    shell = "bash",
+    shell = "zsh",
     terminal = "konsole",
     editor = terminal_execute .. "nano",
     browser = "thorium-browser",
     private_browser = "thorium-browser --private-window",
     file_manager = "dolphin",
-    calculator = "speedcrunch",
+    calculator = "rofi -show calc",
     mixer = terminal_execute .. "pulsemixer",
     bluetooth_control = terminal_execute .. "bluetoothctl",
 }
 
 config.actions = {
     qr_code_clipboard = "qrclip",
-    show_launcher = "rofi -show",
-    show_emoji_picker = core.path.config .. "/rofi/emoji-run.sh",
+    show_launcher = "rofi -show drun",
+    show_emoji_picker = config.places.config .. "/rofi/emoji-run.sh",
 }
 
 config.commands = {}
