@@ -1,6 +1,6 @@
-if not DEBUG then
-    return
-end
+-- if not DEBUG then
+--     return
+-- end
 
 local capi = Capi
 local awful = require("awful")
