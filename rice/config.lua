@@ -17,9 +17,17 @@ config.features = {
     magnifier_tools = false,
     torrent_widget = false,
     weather_widget = false,
-    redshift_widget = false,
-    wallpaper_menu = false,
+    redshift_widget = true,
+    wallpaper_menu = true,
 }
+
+config.places = {}
+config.places.home = os.getenv("HOME")
+config.places.config = os.getenv("XDG_CONFIG_HOME") or (config.places.home .. "/.config")
+config.places.awesome = string.match(gfilesystem.get_configuration_dir(), "^(/?.-)/*$")
+config.places.theme = config.places.awesome .. "/theme"
+config.places.screenshots = config.places.home .. "/inbox/screenshots"
+config.places.wallpapers = config.places.home .. "/Pictures/wallpapers"
 
 config.wm = {
     name = "awesome",
