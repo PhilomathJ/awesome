@@ -3,12 +3,13 @@ local time = os.time
 local open = io.open
 local format = string.format
 local gears = require("gears")
+local network_interface = "ens33"
 
 
 local network_service = {
     config = {
         interval = 2,
-        interface = "enp6s0",
+        interface = network_interface,
     },
     last_data = {
         time = 0,
