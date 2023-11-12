@@ -11,6 +11,7 @@ local layouts = {
         tilted.new("tiling"),
         awful.layout.suit.tile.left,
         awful.layout.suit.corner.nw,
+        awful.layout.suit.corner.ne,
         awful.layout.suit.fair,
         awful.layout.suit.magnifier,
         -- awful.layout.suit.floating,
