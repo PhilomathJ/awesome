@@ -20,7 +20,7 @@ local global_bindings = {
 
     binding.new {
         modifiers = { mod.super, mod.control },
-        triggers = "j",
+        triggers = "p",
         path = "System",
         description = "Power menu",
         on_press = function()
