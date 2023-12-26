@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 require("develop")
 require("globals")
 
@@ -12,3 +13,7 @@ require("ui")
 collectgarbage("setpause", 110)
 collectgarbage("setstepmul", 1000)
 ---@diagnostic enable: param-type-mismatch
+
+-- Autostart applications
+local awful = require("awful")
+awful.spawn.with_shell("~/.config/awesome/autorun.sh")
