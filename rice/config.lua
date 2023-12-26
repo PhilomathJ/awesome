@@ -38,7 +38,7 @@ local terminal_execute = terminal .. " -e "
 
 config.apps = {
     shell = "zsh",
-    terminal = "konsole",
+    terminal = terminal,
     editor = terminal_execute .. "nano",
     browser = "thorium-browser",
     private_browser = "thorium-browser --private-window",
