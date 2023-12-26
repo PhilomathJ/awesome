@@ -11,10 +11,11 @@ local apps = {
     menu = {
         favorites = {
             "Alacritty.desktop",
-            "speedcrunch.desktop",
+            -- "speedcrunch.desktop",
             "brave-browser.desktop",
             "spotify.desktop",
-            "freetube.desktop",
+            "signal.desktop",
+            -- "freetube.desktop",
             {
                 id = "code.desktop",
                 name = "Code",
