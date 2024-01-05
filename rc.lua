@@ -15,5 +15,4 @@ collectgarbage("setstepmul", 1000)
 ---@diagnostic enable: param-type-mismatch
 
 -- Autostart applications
-local awful = require("awful")
-awful.spawn.with_shell("~/.config/awesome/autorun.sh")
+require("autorun")
