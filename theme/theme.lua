@@ -22,7 +22,7 @@ local theme = {}
 
 ----------------------------------------------------------------------------------------------------
 
-theme.gap = dpi(6)
+theme.gap = dpi(2)
 theme.edge_gap = dpi(32)
 
 ----------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ theme.icon_theme = "Archdroid-Amber"
 ----------------------------------------------------------------------------------------------------
 
 theme.font_name = "FantasqueSansM Nerd Font"
-theme.font_size = 12
+theme.font_size = 8
 
 -- TODO: Move to the utils?
 ---@param args? { name?: string, size?: number, size_factor?: number, style?: string|string[] }
@@ -145,11 +145,11 @@ theme.screen_selection_color = hcolor.change(theme.common.primary, { alpha = 0.2
 
 theme.wibar = {
     bg = theme.common.bg,
-    spacing = dpi(12),
-    paddings = hui.new { dpi(8), dpi(16) },
+    spacing = dpi(6),
+    paddings = hui.new { dpi(4), dpi(16) },
 }
 
-theme.wibar.item_height = dpi(30)
+theme.wibar.item_height = dpi(20)
 theme.wibar.height = theme.wibar.item_height + theme.wibar.paddings.top + theme.wibar.paddings.bottom
 
 -- TODO: Rename `theme.wibar.build_placement`
@@ -170,11 +170,11 @@ end
 
 theme.capsule = {
     -- TODO: Move these into `default_style`?
-    item_content_spacing = dpi(8),
+    item_content_spacing = dpi(6),
     item_spacing = dpi(16),
     bar_width = dpi(80),
     bar_height = dpi(12),
-    border_radius = dpi(8),
+    border_radius = dpi(5),
 }
 
 theme.capsule.default_style = {
@@ -188,7 +188,7 @@ theme.capsule.default_style = {
         gshape.rounded_rect(cr, width, height, theme.capsule.border_radius)
     end,
     margins = hui.new { 0 },
-    paddings = hui.new { dpi(6), dpi(14) },
+    paddings = hui.new { dpi(4), dpi(8) },
 }
 
 theme.capsule.styles = {
