@@ -231,8 +231,8 @@ do
 
         local step = args.step or 1
         local buttons = {
-            [btn.wheel_up] = step,
-            [btn.wheel_down] = -step,
+            [btn.wheel_up] = -step,
+            [btn.wheel_down] = step,
         }
 
         local function callback(_, _, _, button, modifiers, _)
