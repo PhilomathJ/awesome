@@ -79,31 +79,21 @@ local client_bindings = {
         path = { "Tag", "Client" },
         description = "Move client to previous/next tag",
         on_press = function(trigger, client)
-            local current_tag_index = ctag.selected.index
-            local tag = client.screen.tags[current_tag_index + trigger.action]
+            -- Get current tag
+            local current_tag = client.screen.selected_tags[1]
+            -- Set new tag reference index
+            local tag = client.screen.tags[current_tag.index + trigger.action]
             if tag then
+                -- Move client
                 client:move_to_tag(tag)
+                -- Switch to 'tag' and select client to maintain focus
+                tag.selected = true
+                current_tag.selected = false
+                client.selected = true
             end
         end,
     },
-
-    -- binding.new {
-    --     modifiers = { mod.control, mod.super, mod.alt, mod.shift },
-    --     triggers = {
-    --         { trigger = "Left", action = awful.tag.viewnext },
-    --         { trigger = "Right", action = awful.tag.viewnext },
-    --     },
-    --     path = { "Tag", "Client" },
-    --     description = "Move client to previous/next tag",
-    --     on_press = function(trigger, client) 
-    --         local tag = client.screen.tags[trigger.index]
-    --         if tag then
-    --             client:move_to_tag(tag)
-    --         end
-    --     end,
-    -- },
 --------------------------------------------------------
-
 
     binding.new {
         modifiers = { mod.control, mod.super, mod.shift },
