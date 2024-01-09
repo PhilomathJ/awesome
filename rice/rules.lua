@@ -232,7 +232,84 @@ ruled.client.connect_signal("request::rules", function()
             },
         },
     }
+    ---------------------------------------------------------------------------------------------------- 
+    ruled.client.append_rules {
+        {
+            rule = {
+                class = "Signal",
+                name = "^Signal$"
+            },
+            properties = {
+                new_tag = core_tag.build {
+                    name = "Messaging",
+                    screen = "DP-4",
+                    layout = awful.layout.suit.fair,
+                    floating=false,
+                    volatile = true,
+                },
+            },
+        },
+    }
     ----------------------------------------------------------------------------------------------------
+    ruled.client.append_rules {
+        {
+            rule = {
+                -- name = "^Messages for web$"
+                instance = "crx_hpfldicfbfomlpcikngkocigghgafkph",
+                class = "Brave-browser",
+            },
+            properties = {
+                    tag = "6",
+                    screen = "DP-4",
+                    layout = awful.layout.suit.fair,
+                    floating=false,
+            },
+            callback  = function (c)
+                local messages_tag_name = "Messaging"
+                local target_tag = nil
+
+                for _, tag in ipairs(c.screen.tags) do
+                    if tag.name == messages_tag_name then
+                        target_tag = tag
+                    end
+                end
+                
+                -- if target_tag == nil then
+                --     local args = {}
+                --     args.screen = "DP-4"
+                --     args.name = messages_tag_name
+        
+                --     atag.add(args.name, atag.M.build(args))
+                -- end
+            
+                -- if target_tag then
+                --     c:move_to_tag(messages_tag_name)
+                -- end
+                if target_tag then
+                    c:move_to_tag (c.screen.tags[target_tag.index])
+                else
+                    local new_tag = nil
+                    new_tag = core_tag.build {
+                        name = messages_tag_name,
+                        screen = "DP-4",
+                        layout = awful.layout.suit.fair,
+                        floating=false,
+                    }
+                    -- local args = {}
+                    -- args.screen = "DP-4"
+                    -- args.name = messages_tag_name
+        
+                    -- local new_tag = atag.add(args.name, atag.M.build(args))
+                    if new_tag then
+                        -- c:move_to_tag (c.screen.tags[new_tag.index])
+                        c:move_to_tag (c.screen.tags[1])
+                    end
+                end
+            end
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
+
 end)
 
 return rules
