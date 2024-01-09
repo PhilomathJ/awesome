@@ -238,7 +238,39 @@ local global_bindings = {
         description = "View previous/next tag",
         on_press = function(trigger) trigger.action() end,
     },
+-- ----------------------------------------------
+--     binding.new {
+--         modifiers = { mod.control, mod.super, mod.alt, mod.shift },
+--         triggers = {
+--             { trigger = "Left", action = awful.tag.viewprev },
+--             { trigger = "Right", action = awful.tag.viewnext },
+--         },
+--         path = { "Tag", "Client" },
+--         description = "Move client to previous/next tag",
+--         on_press = function(trigger, client) 
+--             local tag = client.screen.tags[trigger.index]
+--             if tag then
+--                 client:move_to_tag(tag)
+--             end
+--         end,
+--     },
 
+--     -- binding.new {
+--     --     modifiers = { mod.control, mod.super, mod.alt, mod.shift },
+--     --     triggers = {
+--     --         { trigger = "Left", action = awful.tag.viewnext },
+--     --         { trigger = "Right", action = awful.tag.viewnext },
+--     --     },
+--     --     path = { "Tag", "Client" },
+--     --     description = "Move client to previous/next tag",
+--     --     on_press = function(trigger, client) 
+--     --         local tag = client.screen.tags[trigger.index]
+--     --         if tag then
+--     --             client:move_to_tag(tag)
+--     --         end
+--     --     end,
+--     -- },
+-- --------------------------------------------------------
     binding.new {
         modifiers = { mod.control, mod.super },
         triggers = {

@@ -9,7 +9,7 @@ local mod = binding.modifier
 local btn = binding.button
 local menu_templates = require("ui.menu.templates")
 local mebox = require("widget.mebox")
-
+local ctag = require("core.tag")
 
 local client_bindings = {
 
@@ -27,7 +27,6 @@ local client_bindings = {
             end
         end,
     },
-
 
     binding.new {
         modifiers = {},
@@ -69,6 +68,42 @@ local client_bindings = {
             end
         end,
     },
+
+    ----------------------------------------------
+    binding.new {
+        modifiers = { mod.control, mod.super, mod.alt, mod.shift },
+        triggers = {
+            { trigger = "Left", action = -1 },
+            { trigger = "Right", action = 1 },
+        },
+        path = { "Tag", "Client" },
+        description = "Move client to previous/next tag",
+        on_press = function(trigger, client)
+            local current_tag_index = ctag.selected.index
+            local tag = client.screen.tags[current_tag_index + trigger.action]
+            if tag then
+                client:move_to_tag(tag)
+            end
+        end,
+    },
+
+    -- binding.new {
+    --     modifiers = { mod.control, mod.super, mod.alt, mod.shift },
+    --     triggers = {
+    --         { trigger = "Left", action = awful.tag.viewnext },
+    --         { trigger = "Right", action = awful.tag.viewnext },
+    --     },
+    --     path = { "Tag", "Client" },
+    --     description = "Move client to previous/next tag",
+    --     on_press = function(trigger, client) 
+    --         local tag = client.screen.tags[trigger.index]
+    --         if tag then
+    --             client:move_to_tag(tag)
+    --         end
+    --     end,
+    -- },
+--------------------------------------------------------
+
 
     binding.new {
         modifiers = { mod.control, mod.super, mod.shift },
@@ -161,6 +196,12 @@ local client_bindings = {
             }, { source = "keyboard" })
         end,
     },
+
+    -- Move client: on_press = function(trigger, client) cclient.move(client, trigger.direction) end,
+
+    
+
+    -- 
 
     binding.new {
         modifiers = { mod.super, mod.control, mod.alt },
