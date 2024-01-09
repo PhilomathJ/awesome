@@ -43,7 +43,7 @@ config.apps = {
     browser = "brave",
     private_browser = "brave --incognito",
     file_manager = "thunar",
-    calculator = "rofi -show calc",
+    calculator = "qalculate-gtk",
     mixer = terminal_execute .. "pulsemixer",
     bluetooth_control = terminal_execute .. "bluetoothctl",
 }
