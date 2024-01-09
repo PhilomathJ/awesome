@@ -9,7 +9,6 @@ local mod = binding.modifier
 local btn = binding.button
 local menu_templates = require("ui.menu.templates")
 local mebox = require("widget.mebox")
-local ctag = require("core.tag")
 
 local client_bindings = {
 
