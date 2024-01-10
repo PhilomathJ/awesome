@@ -19,10 +19,12 @@ end
 
 
 local applications = {
-    "nitrogen --restore",
-    "touchegg",
-    -- "xrandr --output DVI-D-0 --off --output HDMI-0 --off --output DP-0 --mode 1920x1080 --pos 0x0 --rotate left --output DP-1 --off --output DP-2 --primary --mode 3840x2160 --pos 1080x0 --rotate normal --output DP-3 --off --output DP-4 --mode 1920x1200 --pos 4920x0 --rotate normal --output DP-5 --off",
+    "nitrogen --restore", -- wallpaper
+    "touchegg", -- Trackpad gestures,
     "signal-desktop",
+    "/opt/brave-bin/brave --profile-directory=Default --app-id=hpfldicfbfomlpcikngkocigghgafkph", -- Google Messages PWA
+    "/usr/bin/Discord",
+    -- "/opt/brave-bin/brave --profile-directory=Default --app-id=agimnkijcaahngcdmfeangaknmldooml" -- YouTube PWA
     -- "feh --no-fehbg --bg-fill ~/Immagini/Arch/Arch-abstract2.jpg --bg-fill ~/Immagini/Arch/Arch-abstract1.jpg",
     -- "picom --config $HOME/.config/awesome/misc/picom/panthom.conf &",
     -- "$HOME/.conky/conky-startup.sh",
