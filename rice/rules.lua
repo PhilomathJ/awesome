@@ -267,14 +267,17 @@ ruled.client.connect_signal("request::rules", function()
                 name = "^Signal$"
             },
             properties = {
-                new_tag = core_tag.build {
-                    name = "Messaging",
-                    screen = "DP-4",
-                    layout = awful.layout.suit.fair,
-                    floating=false,
-                    volatile = true,
-                },
+                tag = messages_tag.name,
+                screen = messages_tag.screen,
+                layout = messages_tag.layout,
+                floating=false,
             },
+            callback  = function (c)
+                local  msg_tag = assert_tag(c, messages_tag)
+                if msg_tag then
+                    c:move_to_tag (msg_tag)
+                end
+            end
         },
     }
     ----------------------------------------------------------------------------------------------------
@@ -286,10 +289,11 @@ ruled.client.connect_signal("request::rules", function()
                 class = "Brave-browser",
             },
             properties = {
-                    tag = messages_tag.name,
-                    screen = messages_tag.screen,
-                    layout = messages_tag.layout,
-                    floating=false,
+                tag = messages_tag.name,
+                screen = messages_tag.screen,
+                layout = messages_tag.layout,
+                floating=false,
+                titlebars_enabled = false,
             },
             callback  = function (c)
                 local  msg_tag = assert_tag(c, messages_tag)
