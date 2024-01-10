@@ -284,6 +284,7 @@ ruled.client.connect_signal("request::rules", function()
     ruled.client.append_rules {
         {
             rule = {
+                -- Google Messages PWA
                 -- name = "^Messages for web$"
                 instance = "crx_hpfldicfbfomlpcikngkocigghgafkph",
                 class = "Brave-browser",
@@ -304,6 +305,36 @@ ruled.client.connect_signal("request::rules", function()
         },
     }
     ----------------------------------------------------------------------------------------------------
+    ruled.client.append_rules {
+        {
+            -- LinkedIn PWA
+            rule = {
+                instance = "crx_ohghonlafcimfigiajnmhdklcbjlbfda",
+                class = "Brave-browser",
+            },
+            properties = {
+                tag = "2",
+                floating = false,
+                switch_to_tags = true,
+            },
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
+    ruled.client.append_rules {
+        {
+            -- Discord
+            rule = {
+                class = "discord",
+            },
+            properties = {
+                screen = "DP-0",
+                tag = "4",
+                floating = false,
+                switch_to_tags = true,
+                -- layout = awful.layout.suit.fair,,
+            },
+        },
+    }
 
 end)
 
