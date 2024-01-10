@@ -3,9 +3,36 @@ local ruled = require("ruled")
 local beautiful = require("theme.theme")
 local core_tag = require("core.tag")
 
-
 ---@class Rice.Rules
 local rules = {}
+
+-- Volatile 'Messages' tag properties
+local messages_tag = {
+    name = "Messaging",
+    screen = "DP-4",
+    layout = awful.layout.suit.fair,
+    volatile = true
+}
+
+-- messages_tag.properties = {
+--     name = "Messaging",
+--     screen = "DP-4",
+--     layout = awful.layout.suit.fair,
+--     volatile = true
+-- }
+
+-- Return a reference to the asserted tag if exists, create it if not
+local function assert_tag(c, tag_props)
+    for _, tag in ipairs(c.screen.tags) do
+        if tag.name == tag_props.name then 
+            return tag
+        end
+    end
+    
+    -- Tag does not exist. Create it and return the reference
+    local new_tag = awful.tag.add(tag_props.name, tag_props)
+    return new_tag
+end
 
 ruled.client.connect_signal("request::rules", function()
     ----------------------------------------------------------------------------------------------------
@@ -259,51 +286,15 @@ ruled.client.connect_signal("request::rules", function()
                 class = "Brave-browser",
             },
             properties = {
-                    tag = "6",
-                    screen = "DP-4",
-                    layout = awful.layout.suit.fair,
+                    tag = messages_tag.name,
+                    screen = messages_tag.screen,
+                    layout = messages_tag.layout,
                     floating=false,
             },
             callback  = function (c)
-                local messages_tag_name = "Messaging"
-                local target_tag = nil
-
-                for _, tag in ipairs(c.screen.tags) do
-                    if tag.name == messages_tag_name then
-                        target_tag = tag
-                    end
-                end
-                
-                -- if target_tag == nil then
-                --     local args = {}
-                --     args.screen = "DP-4"
-                --     args.name = messages_tag_name
-        
-                --     atag.add(args.name, atag.M.build(args))
-                -- end
-            
-                -- if target_tag then
-                --     c:move_to_tag(messages_tag_name)
-                -- end
-                if target_tag then
-                    c:move_to_tag (c.screen.tags[target_tag.index])
-                else
-                    local new_tag = nil
-                    new_tag = core_tag.build {
-                        name = messages_tag_name,
-                        screen = "DP-4",
-                        layout = awful.layout.suit.fair,
-                        floating=false,
-                    }
-                    -- local args = {}
-                    -- args.screen = "DP-4"
-                    -- args.name = messages_tag_name
-        
-                    -- local new_tag = atag.add(args.name, atag.M.build(args))
-                    if new_tag then
-                        -- c:move_to_tag (c.screen.tags[new_tag.index])
-                        c:move_to_tag (c.screen.tags[1])
-                    end
+                local  msg_tag = assert_tag(c, messages_tag)
+                if msg_tag then
+                    c:move_to_tag (msg_tag)
                 end
             end
         },
