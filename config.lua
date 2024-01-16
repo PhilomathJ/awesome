@@ -52,7 +52,7 @@ config.power = {
     shutdown = "systemctl poweroff",
     reboot = "systemctl reboot",
     suspend = "systemctl suspend",
-    kill_session = "loginctl kill-session ''",
+        kill_session = "loginctl kill-session ''",
     lock_session = "loginctl lock-session",
     lock_screen = "light-locker-command --lock",
 }
@@ -60,7 +60,8 @@ config.power = {
 config.actions = {
     qr_code_clipboard = "qrclip",
     show_launcher = "rofi -show drun",
-    show_emoji_picker = config.places.config .. "/rofi/emoji-run.sh",
+    show_emoji_picker = "ibus emoji",
+    -- show_emoji_picker = config.places.config .. "/rofi/emoji-run.sh",
 }
 
 config.commands = {}
