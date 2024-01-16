@@ -260,6 +260,7 @@ ruled.client.connect_signal("request::rules", function()
         },
     }
     ---------------------------------------------------------------------------------------------------- 
+    -- Signal desktop app
     ruled.client.append_rules {
         {
             rule = {
@@ -271,7 +272,7 @@ ruled.client.connect_signal("request::rules", function()
                 screen = messages_tag.screen,
                 layout = messages_tag.layout,
                 floating=false,
-            },
+                            },
             callback  = function (c)
                 local  msg_tag = assert_tag(c, messages_tag)
                 if msg_tag then
@@ -281,10 +282,10 @@ ruled.client.connect_signal("request::rules", function()
         },
     }
     ----------------------------------------------------------------------------------------------------
+    -- Google Messages PWA
     ruled.client.append_rules {
         {
             rule = {
-                -- Google Messages PWA
                 -- name = "^Messages for web$"
                 instance = "crx_hpfldicfbfomlpcikngkocigghgafkph",
                 class = "Brave-browser",
@@ -295,7 +296,7 @@ ruled.client.connect_signal("request::rules", function()
                 layout = messages_tag.layout,
                 floating=false,
                 titlebars_enabled = false,
-            },
+                            },
             callback  = function (c)
                 local  msg_tag = assert_tag(c, messages_tag)
                 if msg_tag then
@@ -305,9 +306,9 @@ ruled.client.connect_signal("request::rules", function()
         },
     }
     ----------------------------------------------------------------------------------------------------
+    -- LinkedIn PWA
     ruled.client.append_rules {
         {
-            -- LinkedIn PWA
             rule = {
                 instance = "crx_ohghonlafcimfigiajnmhdklcbjlbfda",
                 class = "Brave-browser",
@@ -320,15 +321,83 @@ ruled.client.connect_signal("request::rules", function()
         },
     }
     ----------------------------------------------------------------------------------------------------
+    -- Discord desktop app
     ruled.client.append_rules {
         {
-            -- Discord
             rule = {
                 class = "discord",
             },
             properties = {
                 screen = "DP-0",
                 tag = "4",
+                floating = false,
+                switch_to_tags = true,
+                -- layout = awful.layout.suit.fair,,
+            },
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
+    -- Discord
+    ruled.client.append_rules {
+        {
+            rule = {
+                instance = "crx_mjoklplbddabcmpepnokjaffbmgbkkgg",
+                class = "Brave-browser",
+            },
+            properties = {
+                screen = "DP-4",
+                tag = "3",
+                floating = false,
+                switch_to_tags = true,
+                -- layout = awful.layout.suit.fair,,
+            },
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
+    -- YouTube PWA
+    ruled.client.append_rules {
+        {
+            rule = {
+                instance = "crx_agimnkijcaahngcdmfeangaknmldooml",
+                class = "Brave-browser",
+            },
+            properties = {
+                screen = "DP-4",
+                tag = "6",
+                floating = false,
+                switch_to_tags = true,
+                -- layout = awful.layout.suit.fair,,
+            },
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
+    -- Gmail PWA
+    ruled.client.append_rules {
+        {
+            rule = {
+                instance = "crx_fmgjjmmmlfnkbppncabfkddbjimcfncm",
+                class = "Brave-browser",
+            },
+            properties = {
+                screen = "DP-0",
+                tag = "5",
+                floating = false,
+                titlebars_enabled = false,
+                switch_to_tags = true,
+                -- layout = awful.layout.suit.fair,,
+            },
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
+    -- Notion app
+    ruled.client.append_rules {
+        {
+            rule = {
+                class = "notion-snap-reborn",
+            },
+            properties = {
+                screen = "DP-4",
+                tag = "2",
                 floating = false,
                 switch_to_tags = true,
                 -- layout = awful.layout.suit.fair,,
