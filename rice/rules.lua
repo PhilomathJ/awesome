@@ -1,18 +1,12 @@
 local awful = require("awful")
+local naughty = require("naughty")
 local ruled = require("ruled")
 local beautiful = require("theme.theme")
 local core_tag = require("core.tag")
+local capi = Capi
 
 ---@class Rice.Rules
 local rules = {}
-
--- Volatile 'Messages' tag properties
-local messages_tag = {
-    name = "Messaging",
-    screen = "DP-4",
-    layout = awful.layout.suit.fair,
-    volatile = true
-}
 
 -- messages_tag.properties = {
 --     name = "Messaging",
@@ -33,6 +27,18 @@ local function assert_tag(c, tag_props)
     local new_tag = awful.tag.add(tag_props.name, tag_props)
     return new_tag
 end
+
+local function describe_client(c)
+    local msg = ""
+    msg = msg .. "class: " .. tostring(c.class) .. "\n"
+    msg = msg .. "instance: " .. tostring(c.instance) .. "\n"
+    msg = msg .. "name: " .. tostring(c.name) .. "\n"
+    msg = msg .. "pid: " .. tostring(c.pid) .. "\n"
+    msg = msg .. "screen: " .. tostring(c.screen)
+
+    naughty.notify({text = msg})
+end
+
 
 ruled.client.connect_signal("request::rules", function()
     ----------------------------------------------------------------------------------------------------
@@ -260,6 +266,14 @@ ruled.client.connect_signal("request::rules", function()
         },
     }
     ---------------------------------------------------------------------------------------------------- 
+-- Volatile 'Messages' tag properties
+local messages_tag = {
+    name = "Messaging",
+    screen = "DP-4",
+    layout = awful.layout.suit.fair,
+    volatile = true
+}
+
     -- Signal desktop app
     ruled.client.append_rules {
         {
@@ -296,11 +310,36 @@ ruled.client.connect_signal("request::rules", function()
                 layout = messages_tag.layout,
                 floating=false,
                 titlebars_enabled = false,
+                visible = false,
                             },
             callback  = function (c)
+                -- Check if Google Messages PWA is already running
+                -- Kill client if an instance is already running
+                -- Apply focus to client
+                local msg_client_counter = 0
+                local running_client = {}   -- Holds an instance of the running Google Messages PWA client
+                
+                local brave_msgs_clients = function(all_clients)
+                    return awful.rules.match(all_clients, {class = "Brave-browser", instance = "crx_hpfldicfbfomlpcikngkocigghgafkph"})
+                end
+
+                for msg_client in awful.client.iterate(brave_msgs_clients) do
+                    describe_client(msg_client)
+                    if msg_client_counter >= 1 then  -- if a running client already exists, kill the new one
+                        c:kill()
+                        naughty.notify({text = "Killed the new client: " .. c.instance})
+                        break
+                    end
+                    running_client = msg_client -- store a reference to the running client
+                    msg_client_counter = msg_client_counter + 1
+                end
+
+                -- Continue to launch client on specific tag
+                naughty.notify({text = "Google Messages PWA is not running. Starting a fresh instance"})
                 local  msg_tag = assert_tag(c, messages_tag)
                 if msg_tag then
                     c:move_to_tag (msg_tag)
+                    c.visible = true
                 end
             end
         },
@@ -365,6 +404,7 @@ ruled.client.connect_signal("request::rules", function()
                 screen = "DP-4",
                 tag = "6",
                 floating = false,
+                titlebars_enabled = false,
                 switch_to_tags = true,
                 -- layout = awful.layout.suit.fair,,
             },
@@ -400,6 +440,24 @@ ruled.client.connect_signal("request::rules", function()
                 tag = "2",
                 floating = false,
                 switch_to_tags = true,
+                -- layout = awful.layout.suit.fair,,
+            },
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
+    -- Google Drive PWA
+    ruled.client.append_rules {
+        {
+            rule = {
+                instance = "crx_aghbiahbpaijignceidepookljebhfak",
+                class = "Brave-browser",
+            },
+            properties = {
+                -- screen = "DP-4",
+                -- tag = "6",
+                floating = false,
+                titlebars_enabled = false,
+                -- switch_to_tags = true,
                 -- layout = awful.layout.suit.fair,,
             },
         },
