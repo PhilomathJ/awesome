@@ -462,7 +462,24 @@ local messages_tag = {
             },
         },
     }
-
+    ----------------------------------------------------------------------------------------------------
+    -- Facebook PWA
+    ruled.client.append_rules {
+        {
+            rule = {
+                instance = "crx_kippjfofjhjlffjecoapiogbkgbpmgej",
+                class = "Brave-browser",
+            },
+            properties = {
+                -- screen = "DP-4",
+                -- tag = "6",
+                floating = false,
+                titlebars_enabled = false,
+                -- switch_to_tags = true,
+                -- layout = awful.layout.suit.fair,,
+            },
+        },
+    }
 end)
 
 return rules
