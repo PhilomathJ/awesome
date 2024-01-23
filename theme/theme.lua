@@ -677,7 +677,7 @@ theme.client = {
     normal = {
         bg = theme.common.bg_66,
         fg = theme.common.fg,
-        border_color = theme.common.bg_140,
+        border_color = theme.common.bg_105,
         border_width = client_border_width,
     },
     active = {
@@ -690,6 +690,12 @@ theme.client = {
         bg = theme.common.urgent_bright,
         fg = theme.common.fg_bright,
         border_color = theme.common.urgent_bright,
+        border_width = client_border_width,
+    },
+    floating = {
+        bg = theme.common.urgent_bright,
+        fg = theme.common.fg_bright,
+        border_color = theme.common.secondary_bright,
         border_width = client_border_width,
     },
 }

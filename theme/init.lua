@@ -37,6 +37,7 @@ local function map(theme)
     b.titlebar_bg_urgent = theme.client.urgent.bg
     b.titlebar_fg_urgent = theme.client.urgent.fg
 
+    pretty.border_color_floating = theme.client.floating.border_color
     ----------------------------------------------------------------------------------------------------
 
     b.bg_systray = theme.systray.bg
