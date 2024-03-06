@@ -480,6 +480,26 @@ local messages_tag = {
             },
         },
     }
+    ----------------------------------------------------------------------------------------------------
+    -- Calculator floating and on top
+    ruled.client.append_rules {
+        {
+            rule_any = {
+                class = {
+                    "qalculate-gtk",
+                    "Qalculate-gtk",
+                }
+            },
+            properties = {
+                -- screen = "DP-4",
+                -- tag = "6",
+                floating = true,
+                titlebars_enabled = false,
+                ontop = true,
+                sticky = true,
+            },
+        },
+    }
 end)
 
 return rules
