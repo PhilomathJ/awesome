@@ -37,8 +37,9 @@ local function map(theme)
     pretty.titlebar_bg_urgent = theme.client.urgent.bg
     pretty.titlebar_fg_urgent = theme.client.urgent.fg
 
-    pretty.border_color_floating = theme.client.floating.border_color
-    ----------------------------------------------------------------------------------------------------
+    pretty.border_color_floating = theme.common.secondary_bright
+    pretty.border_color_maximized = theme.palette.green
+    -- ----------------------------------------------------------------------------------------------------
 
     pretty.bg_systray = theme.systray.bg
     pretty.systray_icon_spacing = theme.systray.spacing
