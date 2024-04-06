@@ -39,6 +39,25 @@ local function describe_client(c)
     naughty.notify({text = msg})
 end
 
+local my_screens = {}
+
+my_screens.hp = {
+        name = "hp",
+        display = "DP-0",
+        index = 2
+    }
+
+my_screens.asus = {
+    name = "asus",
+    display = "DP-4",
+    index = 1
+}
+    
+my_screens.lenovo = {
+        name = "lenovo",
+        display = "DP-2",
+        index = 3
+}
 
 ruled.client.connect_signal("request::rules", function()
     ----------------------------------------------------------------------------------------------------
@@ -49,9 +68,10 @@ ruled.client.connect_signal("request::rules", function()
             properties = {
                 screen = awful.screen.preferred,
                 focus = awful.client.focus.filter,
-                titlebars_enabled = DEBUG,
+                titlebars_enabled = false,
                 raise = true,
                 shape = beautiful.client.shape,
+                floating = false,
             },
             callback = function(client)
                 awful.client.setslave(client)
@@ -65,7 +85,7 @@ ruled.client.connect_signal("request::rules", function()
             },
             properties = {
                 floating = true,
-                titlebars_enabled = "toolbox",
+                titlebars_enabled = "false",
             },
         },
         {
@@ -80,7 +100,7 @@ ruled.client.connect_signal("request::rules", function()
             },
             properties = {
                 floating = true,
-                titlebars_enabled = true,
+                titlebars_enabled = false,
             },
         },
         {
@@ -92,7 +112,7 @@ ruled.client.connect_signal("request::rules", function()
                 },
             },
             properties = {
-                titlebars_enabled = "toolbox",
+                titlebars_enabled = "false",
                 floating = true,
                 ontop = true,
                 sticky = true,
@@ -129,114 +149,12 @@ ruled.client.connect_signal("request::rules", function()
                 floating = true,
                 ontop = true,
                 sticky = true,
-                titlebars_enabled = "toolbox",
+                titlebars_enabled = "false",
                 placement = awful.placement.centered,
             },
         },
     }
     ----------------------------------------------------------------------------------------------------
-    ruled.client.append_rules {
-        {
-            rule = {
-                class = "SpeedCrunch",
-            },
-            properties = {
-                floating = true,
-                ontop = true,
-                titlebars_enabled = true,
-            },
-        },
-    }
-    ----------------------------------------------------------------------------------------------------
-    ruled.client.append_rules {
-        {
-            rule = {
-                class = "^1Password$",
-            },
-            properties = {
-                floating = true,
-                titlebars_enabled = true,
-            },
-        },
-        {
-            rule = {
-                class = "^1Password$",
-                name = "Quick Access",
-            },
-            properties = {
-                skip_taskbar = true,
-                titlebars_enabled = "toolbox",
-            },
-        },
-    }
-    ----------------------------------------------------------------------------------------------------
-    ruled.client.append_rules {
-        {
-            rule = {
-                class = "qr_code_clipboard",
-            },
-            properties = {
-                floating = true,
-                ontop = true,
-                sticky = true,
-                placement = awful.placement.centered,
-                titlebars_enabled = "toolbox",
-            },
-        },
-    }
-    ----------------------------------------------------------------------------------------------------
-    ruled.client.append_rules {
-        {
-            rule = {
-                class = "Dragon-drop",
-            },
-            properties = {
-                floating = true,
-                ontop = true,
-                sticky = true,
-                placement = awful.placement.centered,
-                titlebars_enabled = "toolbox",
-                border_color = beautiful.common.secondary_bright,
-            },
-        },
-    }
-    ----------------------------------------------------------------------------------------------------
-    ruled.client.append_rules {
-        {
-            rule = {
-                class = "^Xephyr$",
-            },
-            properties = {
-                floating = false,
-                switch_to_tags = true,
-                new_tag = core_tag.build {
-                    name = "Xephyr",
-                    volatile = true,
-                    selected = true,
-                },
-            },
-        },
-    }
-    ----------------------------------------------------------------------------------------------------
-    ruled.client.append_rules {
-        {
-            rule = {
-                name = "^Event Tester$",
-            },
-            properties = {
-                titlebars_enabled = "toolbox",
-                floating = true,
-                ontop = true,
-                sticky = true,
-                placement = function(client)
-                    awful.placement.bottom_left(client, {
-                        honor_workarea = true,
-                        margins = beautiful.edge_gap,
-                    })
-                end,
-            },
-        },
-    }
     ----------------------------------------------------------------------------------------------------
     ruled.client.append_rules {
         {
@@ -415,7 +333,7 @@ local messages_tag = {
     ruled.client.append_rules {
         {
             rule = {
-                instance = "crx_pacgdjiidkfdhilcljkeebfoklekebig",
+                instance = "crx_fmgjjmmmlfnkbppncabfkddbjimcfncm",
                 class = "Brave-browser",
             },
             properties = {
@@ -427,6 +345,13 @@ local messages_tag = {
                 switch_to_tags = true,
                 -- layout = awful.layout.suit.fair,,
             },
+            callback = function(c)
+                --Rename tag 5 on screen: HP to "Mail"
+                local t = screen[my_screens.hp.index].tags[5]
+                if t then
+                    t.name = "Mail"
+                end
+            end,
         },
     }
     ----------------------------------------------------------------------------------------------------
@@ -446,6 +371,13 @@ local messages_tag = {
                 switch_to_tags = true,
                 layout = awful.layout.suit.tileleft
             },
+            callback = function(c)
+                --Rename tag 6 on screen: HP to "Proton"
+                local t = screen[my_screens.hp.index].tags[6]
+                if t then
+                    t.name = "Proton"
+                end
+            end,
         },
     }
     ----------------------------------------------------------------------------------------------------
@@ -465,6 +397,13 @@ local messages_tag = {
                 switch_to_tags = true,
                 layout = awful.layout.suit.tileleft
             },
+            callback = function(c)
+                --Rename tag 6 on screen: HP to "Proton"
+                local t = screen[my_screens.hp.index].tags[6]
+                if t then
+                    t.name = "Proton"
+                end
+            end,
         },
     }
     ----------------------------------------------------------------------------------------------------
