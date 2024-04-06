@@ -415,7 +415,7 @@ local messages_tag = {
     ruled.client.append_rules {
         {
             rule = {
-                instance = "crx_fmgjjmmmlfnkbppncabfkddbjimcfncm",
+                instance = "crx_pacgdjiidkfdhilcljkeebfoklekebig",
                 class = "Brave-browser",
             },
             properties = {
@@ -423,8 +423,47 @@ local messages_tag = {
                 tag = "5",
                 floating = false,
                 titlebars_enabled = false,
+                requests_no_titlebar = true,
                 switch_to_tags = true,
                 -- layout = awful.layout.suit.fair,,
+            },
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
+    -- Proton Mail PWA
+    ruled.client.append_rules {
+        {
+            rule = {
+                instance = "crx_jnpecgipniidlgicjocehkhajgdnjekh",
+                class = "Brave-browser",
+            },
+            properties = {
+                screen = "DP-0",
+                tag = "6",
+                floating = false,
+                titlebars_enabled = false,
+                requests_no_titlebar = true,
+                switch_to_tags = true,
+                layout = awful.layout.suit.tileleft
+            },
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
+    ----------------------------------------------------------------------------------------------------
+    -- Proton Pass PWA
+    ruled.client.append_rules {
+        {
+            rule = {
+                instance = "crx_hkhckfoofhljcngmlnlojcbplgkcpcab",
+                class = "Brave-browser",
+            },
+            properties = {
+                screen = "DP-0",
+                tag = "6",
+                floating = false,
+                titlebars_enabled = false,
+                switch_to_tags = true,
+                layout = awful.layout.suit.tileleft
             },
         },
     }
