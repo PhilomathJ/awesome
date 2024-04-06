@@ -337,8 +337,8 @@ local messages_tag = {
                 class = "Brave-browser",
             },
             properties = {
-                screen = "DP-0",
-                tag = "5",
+                screen = screen[my_screens.hp.display],
+                tag = screen[my_screens.hp.index].tags[5],
                 floating = false,
                 titlebars_enabled = false,
                 requests_no_titlebar = true,
@@ -346,10 +346,13 @@ local messages_tag = {
                 -- layout = awful.layout.suit.fair,,
             },
             callback = function(c)
-                --Rename tag 5 on screen: HP to "Mail"
+                --Rename tag 5 on screen: HP to "Mail"m change the layout, and reduce the primary clients by 1
                 local t = screen[my_screens.hp.index].tags[5]
                 if t then
                     t.name = "Mail"
+                    t.layout = awful.layout.suit.tile.left
+                    -- Reduce the unmber of primary clients for this layout
+                    t.master_count = 0
                 end
             end,
         },
@@ -363,19 +366,23 @@ local messages_tag = {
                 class = "Brave-browser",
             },
             properties = {
-                screen = "DP-0",
-                tag = "6",
+                screen = screen[my_screens.hp.display],
+                tag = screen[my_screens.hp.index].tags[6],
                 floating = false,
                 titlebars_enabled = false,
                 requests_no_titlebar = true,
                 switch_to_tags = true,
-                layout = awful.layout.suit.tileleft
             },
             callback = function(c)
                 --Rename tag 6 on screen: HP to "Proton"
-                local t = screen[my_screens.hp.index].tags[6]
-                if t then
-                    t.name = "Proton"
+                local t6 = screen[my_screens.hp.index].tags[6]
+                local t5 = screen[my_screens.hp.index].tags[5]
+                if t6 then
+                    t6.name = "Proton"
+                    t6.layout = awful.layout.suit.tile.left
+                    t6.master_count = 0
+                    -- Also show on tag 5
+                    c:toggle_tag(t5)
                 end
             end,
         },
@@ -390,18 +397,21 @@ local messages_tag = {
                 class = "Brave-browser",
             },
             properties = {
-                screen = "DP-0",
-                tag = "6",
+                screen = screen[my_screens.hp.display],
+                tag = screen[my_screens.hp.index].tags[6],
                 floating = false,
                 titlebars_enabled = false,
                 switch_to_tags = true,
-                layout = awful.layout.suit.tileleft
+                ontop = true,
             },
             callback = function(c)
                 --Rename tag 6 on screen: HP to "Proton"
                 local t = screen[my_screens.hp.index].tags[6]
                 if t then
                     t.name = "Proton"
+                    t.layout = awful.layout.suit.tile.left
+                    -- Reduce the unmber of primary clients for this layout
+                    t.master_count = 0
                 end
             end,
         },
