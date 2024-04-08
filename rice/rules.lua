@@ -68,10 +68,10 @@ ruled.client.connect_signal("request::rules", function()
             properties = {
                 screen = awful.screen.preferred,
                 focus = awful.client.focus.filter,
+                floating = false,
                 titlebars_enabled = false,
                 raise = true,
                 shape = beautiful.client.shape,
-                floating = false,
             },
             callback = function(client)
                 awful.client.setslave(client)
@@ -88,21 +88,21 @@ ruled.client.connect_signal("request::rules", function()
                 titlebars_enabled = "false",
             },
         },
-        {
-            id = "floating",
-            rule_any = {
-                class = {
-                    "Arandr",
-                },
-                role = {
-                    "pop-up",
-                },
-            },
-            properties = {
-                floating = true,
-                titlebars_enabled = false,
-            },
-        },
+        -- {
+        --     id = "floating",
+        --     rule_any = {
+        --         class = {
+        --             "Arandr",
+        --         },
+        --         role = {
+        --             "pop-up",
+        --         },
+        --     },
+        --     properties = {
+        --         floating = true,
+        --         titlebars_enabled = false,
+        --     },
+        -- },
         {
             id = "picture_in_picture",
             rule_any = {
