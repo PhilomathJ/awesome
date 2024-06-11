@@ -242,10 +242,9 @@ local messages_tag = {
                 end
 
                 for msg_client in awful.client.iterate(brave_msgs_clients) do
-                    describe_client(msg_client)
+                    -- describe_client(msg_client)
                     if msg_client_counter >= 1 then  -- if a running client already exists, kill the new one
                         c:kill()
-                        naughty.notify({text = "Killed the new client: " .. c.instance})
                         break
                     end
                     running_client = msg_client -- store a reference to the running client
@@ -253,7 +252,6 @@ local messages_tag = {
                 end
 
                 -- Continue to launch client on specific tag
-                naughty.notify({text = "Google Messages PWA is not running. Starting a fresh instance"})
                 local  msg_tag = assert_tag(c, messages_tag)
                 if msg_tag then
                     c:move_to_tag (msg_tag)
