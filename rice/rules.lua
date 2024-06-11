@@ -44,19 +44,19 @@ local my_screens = {}
 my_screens.hp = {
         name = "hp",
         display = "DP-0",
-        index = 2
+        index = "2"
     }
 
 my_screens.asus = {
     name = "asus",
     display = "DP-4",
-    index = 1
+    index = "1"
 }
     
 my_screens.lenovo = {
         name = "lenovo",
         display = "DP-2",
-        index = 3
+        index = "3"
 }
 
 ruled.client.connect_signal("request::rules", function()
@@ -337,8 +337,8 @@ local messages_tag = {
                 class = "Brave-browser",
             },
             properties = {
-                screen = screen[my_screens.hp.display],
-                tag = screen[my_screens.hp.index].tags[5],
+                screen = "DP-0",
+                tag = "5",
                 floating = false,
                 titlebars_enabled = false,
                 requests_no_titlebar = true,
@@ -347,7 +347,7 @@ local messages_tag = {
             },
             callback = function(c)
                 --Rename tag 5 on screen: HP to "Mail"m change the layout, and reduce the primary clients by 1
-                local t = screen[my_screens.hp.index].tags[5]
+                local t = screen["DP-0"].tags[5]
                 if t then
                     t.name = "Mail"
                     t.layout = awful.layout.suit.tile.left
@@ -366,8 +366,8 @@ local messages_tag = {
                 class = "Brave-browser",
             },
             properties = {
-                screen = screen[my_screens.hp.display],
-                tag = screen[my_screens.hp.index].tags[6],
+                screen = "DP-0",
+                tag = "6",
                 floating = false,
                 titlebars_enabled = false,
                 requests_no_titlebar = true,
@@ -375,8 +375,8 @@ local messages_tag = {
             },
             callback = function(c)
                 --Rename tag 6 on screen: HP to "Proton"
-                local t6 = screen[my_screens.hp.index].tags[6]
-                local t5 = screen[my_screens.hp.index].tags[5]
+                local t6 = screen["DP-0"].tags[6]
+                local t5 = screen["DP-0"].tags[5]
                 if t6 then
                     t6.name = "Proton"
                     t6.layout = awful.layout.suit.tile.left
@@ -397,8 +397,8 @@ local messages_tag = {
                 class = "Brave-browser",
             },
             properties = {
-                screen = screen[my_screens.hp.display],
-                tag = screen[my_screens.hp.index].tags[6],
+                screen = screen["DP-0"],
+                tag = "6",
                 floating = false,
                 titlebars_enabled = false,
                 switch_to_tags = true,
@@ -406,7 +406,7 @@ local messages_tag = {
             },
             callback = function(c)
                 --Rename tag 6 on screen: HP to "Proton"
-                local t = screen[my_screens.hp.index].tags[6]
+                local t = screen["DP-0"].tags[6]
                 if t then
                     t.name = "Proton"
                     t.layout = awful.layout.suit.tile.left
