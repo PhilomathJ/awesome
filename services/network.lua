@@ -3,7 +3,7 @@ local time = os.time
 local open = io.open
 local format = string.format
 local gears = require("gears")
-local network_interface = "eth0"
+local network_interface = "enp0s31f6"
 
 
 local network_service = {
