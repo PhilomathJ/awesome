@@ -26,7 +26,7 @@ config.places.home = os.getenv("HOME")
 config.places.config = os.getenv("XDG_CONFIG_HOME") or (config.places.home .. "/.config")
 config.places.awesome = string.match(gfilesystem.get_configuration_dir(), "^(/?.-)/*$")
 config.places.theme = config.places.awesome .. "/theme"
-config.places.screenshots = config.places.home .. "/inbox/screenshots"
+config.places.screenshots = config.places.home .. "/Pictures/screenshots"
 config.places.wallpapers = config.places.home .. "/Pictures/wallpapers"
 
 config.wm = {
