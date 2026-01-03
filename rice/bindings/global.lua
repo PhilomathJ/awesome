@@ -247,7 +247,7 @@ local global_bindings = {
 --         },
 --         path = { "Tag", "Client" },
 --         description = "Move client to previous/next tag",
---         on_press = function(trigger, client) 
+--         on_press = function(trigger, client)
 --             local tag = client.screen.tags[trigger.index]
 --             if tag then
 --                 client:move_to_tag(tag)
@@ -263,7 +263,7 @@ local global_bindings = {
 --     --     },
 --     --     path = { "Tag", "Client" },
 --     --     description = "Move client to previous/next tag",
---     --     on_press = function(trigger, client) 
+--     --     on_press = function(trigger, client)
 --     --         local tag = client.screen.tags[trigger.index]
 --     --         if tag then
 --     --             client:move_to_tag(tag)
@@ -475,38 +475,54 @@ local global_bindings = {
 }
 
 if config.features.screenshot_tools then
-    global_bindings = {
+    global_bindings = gtable.join(global_bindings, {
 
         binding.new {
             modifiers = {},
             triggers = "Print",
-            path = { "Screenshot" },
-            description = "Start a manual capture",
-            on_press = function() awful.spawn.with_shell("flameshot gui") end,
+            path = { "Screenshot", "To Clipboard" },
+            description = "Current monitor",
+            on_press = function() services.screenshot.take { mode = "screen", output = "clipboard" } end,
         },
 
         binding.new {
-            modifiers = { mod.control },
+            modifiers = { mod.super },
             triggers = "Print",
-            path = { "Screenshot" },
-            description = "Capture a window",
-            on_press = function() awful.spawn.with_shell("flameshot gui --region \"$(slop -q -c 1,0,0,0.5 -b 5 -n 0 -l -t 9999999)\"") end,
+            path = { "Screenshot", "To File" },
+            description = "Current monitor",
+            on_press = function() services.screenshot.take { mode = "screen" } end,
+        },
+
+        binding.new {
+            modifiers = { mod.alt },
+            triggers = "Print",
+            path = { "Screenshot", "To Clipboard" },
+            description = "Active window",
+            on_press = function() services.screenshot.take { mode = "window", output = "clipboard" } end,
         },
 
         binding.new {
             modifiers = { mod.shift },
             triggers = "Print",
-            path = { "Screenshot" },
-            description = "Capture a single screen",
-            on_press = function() awful.spawn.with_shell("flameshot gui --region \"$(printf '%s' \"$DISPLAY\" | sd '^:(\\d+)' 'screen$1')\"") end,
+            path = { "Screenshot", "To File" },
+            description = "Active window",
+            on_press = function() services.screenshot.take { mode = "window" } end,
         },
 
         binding.new {
-            modifiers = { mod.control, mod.shift },
+            modifiers = { mod.control, mod.alt },
             triggers = "Print",
-            path = { "Screenshot" },
-            description = "Capture the entire desktop",
-            on_press = function() awful.spawn.with_shell("flameshot gui --region all") end,
+            path = { "Screenshot", "To Clipboard" },
+            description = "Rectangular selection",
+            on_press = function() services.screenshot.take { mode = "selection", shader = "boxzoom", output = "clipboard" } end,
+        },
+
+        binding.new {
+            modifiers = { mod.control, mod.alt, mod.super },
+            triggers = "Print",
+            path = { "Screenshot", "To File" },
+            description = "Rectangular selection",
+            on_press = function() services.screenshot.take { mode = "selection", shader = "boxzoom" } end,
         },
 
         binding.new {
@@ -521,7 +537,7 @@ if config.features.screenshot_tools then
 end
 
 if config.features.wallpaper_menu then
-    global_bindings = {
+    global_bindings = gtable.join(global_bindings, {
 
         binding.new {
             modifiers = { mod.shift, mod.super, mod.control },
