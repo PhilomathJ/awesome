@@ -1,3 +1,4 @@
+---@diagnostic disable: assign-type-mismatch, undefined-field
 local capi = Capi
 local awful = require("awful")
 local aplacement = require("awful.placement")
