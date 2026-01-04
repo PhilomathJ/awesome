@@ -170,6 +170,18 @@ local global_bindings = {
         on_press = function() awful.spawn(config.actions.show_emoji_picker) end,
     },
 
+    binding.new {
+        modifiers = { mod.super, mod.control },
+        triggers = "a",
+        path = "Launcher",
+        description = "Edit Awesome config",
+        on_press = function()
+            -- Set a flag that the next Code window should go to Awesome tag
+            _G.next_vscode_to_awesome = true
+            awful.spawn("code " .. config.places.awesome)
+        end,
+    },
+
 
     binding.new {
         modifiers = { mod.super, mod.control },

@@ -18,11 +18,11 @@ local rules = {}
 -- Return a reference to the asserted tag if exists, create it if not
 local function assert_tag(c, tag_props)
     for _, tag in ipairs(c.screen.tags) do
-        if tag.name == tag_props.name then 
+        if tag.name == tag_props.name then
             return tag
         end
     end
-    
+
     -- Tag does not exist. Create it and return the reference
     local new_tag = awful.tag.add(tag_props.name, tag_props)
     return new_tag
@@ -43,18 +43,18 @@ local my_screens = {}
 
 my_screens.dell = {
     name = "dell",
-        display = "DP-0",
+    display = "DP-0",
     index = "3"
-    }
+}
 
 my_screens.asus = {
     name = "asus",
     display = "DP-2",
     index = "2"
 }
-    
+
 my_screens.lenovo = {
-        name = "lenovo",
+    name = "lenovo",
     display = "DP-4",
     index = "1"
 }
@@ -183,7 +183,34 @@ ruled.client.connect_signal("request::rules", function()
             },
         },
     }
-    ---------------------------------------------------------------------------------------------------- 
+    ----------------------------------------------------------------------------------------------------
+-- Volatile 'Awesome' tag properties for VSCode editing config
+local awesome_tag = {
+    name = "Awesome",
+    screen = "DP-2",  -- ASUS monitor (center)
+    layout = awful.layout.suit.tile,
+    volatile = true
+}
+
+    -- VSCode opened with awesome config directory
+    ruled.client.append_rules {
+        {
+            rule = {
+                class = "Code",
+            },
+            callback = function (c)
+                -- Check if this VSCode was spawned from the Awesome config keybinding
+                if _G.next_vscode_to_awesome then
+                    _G.next_vscode_to_awesome = false -- Clear the flag
+                    local awm_tag = assert_tag(c, awesome_tag)
+                    if awm_tag then
+                        c:move_to_tag(awm_tag)
+                    end
+                end
+            end
+        },
+    }
+    ----------------------------------------------------------------------------------------------------
 -- Volatile 'Messages' tag properties
 local messages_tag = {
     name = "Messaging",
@@ -236,7 +263,7 @@ local messages_tag = {
                 -- Apply focus to client
                 local msg_client_counter = 0
                 local running_client = {}   -- Holds an instance of the running Google Messages PWA client
-                
+
                 local brave_msgs_clients = function(all_clients)
                     return awful.rules.match(all_clients, {class = "Brave-browser", instance = "crx_hpfldicfbfomlpcikngkocigghgafkph"})
                 end
