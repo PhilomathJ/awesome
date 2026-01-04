@@ -870,67 +870,67 @@ end
 theme.layouts = {
     tiling = {
         text = "Tiling",
-        icon = theme.icon("/icons/layouts/tile.png"),
+        icon = theme.icon("layouts/tile.png"),
     },
     floating = {
         text = "Floating",
-        icon = theme.icon("/icons/layouts/floating.png"),
+        icon = theme.icon("layouts/floating.png"),
     },
     max = {
         text = "Maximize",
-        icon = theme.icon("/icons/layouts/max.png"),
+        icon = theme.icon("layouts/max.png"),
     },
     fullscreen = {
         text = "Fullscreen",
-        icon = theme.icon("/icons/layouts/fullscreen.png"),
+        icon = theme.icon("layouts/fullscreen.png"),
     },
     tileleft = {
         text = "Tile-Left",
-        icon = theme.icon("/icons/layouts/tileleft.png"),
+        icon = theme.icon("layouts/tileleft.png"),
     },
     tilebottom = {
         text = "Tile-Bottom",
-        icon = theme.icon("/icons/layouts/tilebottom.png"),
+        icon = theme.icon("layouts/tilebottom.png"),
     },
     tiletop = {
         text = "Tile-Top",
-        icon = theme.icon("/icons/layouts/tiletop.png"),
+        icon = theme.icon("layouts/tiletop.png"),
     },
     fairv = {
         text = "Fair-Vertical",
-        icon = theme.icon("/icons/layouts/fairv.png"),
+        icon = theme.icon("layouts/fairv.png"),
     },
     fairh = {
         text = "Fair-Horizontal",
-        icon = theme.icon("/icons/layouts/fairh.png"),
+        icon = theme.icon("layouts/fairh.png"),
     },
     spiral = {
         text = "Spiral",
-        icon = theme.icon("/icons/layouts/spiral.png"),
+        icon = theme.icon("layouts/spiral.png"),
     },
     spiraldwindle = {
         text = "Spiral-Dwindle",
-        icon = theme.icon("/icons/layouts/dwindle.png"),
+        icon = theme.icon("layouts/dwindle.png"),
     },
     magnifier = {
         text = "Magnifier",
-        icon = theme.icon("/icons/layouts/magnifier.png"),
+        icon = theme.icon("layouts/magnifier.png"),
     },
     cornernw = {
         text = "Corner-NW",
-        icon = theme.icon("/icons/layouts/cornernw.png"),
+        icon = theme.icon("layouts/cornernw.png"),
     },
     cornerne = {
         text = "Corner-NE",
-        icon = theme.icon("/icons/layouts/cornerne.png"),
+        icon = theme.icon("layouts/cornerne.png"),
     },
     cornersw = {
         text = "Corner-SW",
-        icon = theme.icon("/icons/layouts/cornersw.png"),
+        icon = theme.icon("layouts/cornersw.png"),
     },
     cornerse = {
         text = "Corner-SE",
-        icon = theme.icon("/icons/layouts/cornerse.png"),
+        icon = theme.icon("layouts/cornerse.png"),
     },
 }
 
