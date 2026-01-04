@@ -9,7 +9,15 @@ local layouts = require("rice.layouts")
 ---@field names string[] # List of default tag names for each screen
 local tags = {
     names = {
-        "Main",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
     },
 }
 
@@ -17,7 +25,7 @@ capi.awesome.connect_signal("tag::build", function(tag, args)
     tag.layout = layouts.list[1]
     tag.gap_single_client = false
     tag.master_fill_policy = "master_width_factor"
-    tag.master_width_factor = 0.7
+    tag.master_width_factor = 0.6
     tag.volatile = true
 end)
 
