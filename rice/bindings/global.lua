@@ -475,7 +475,7 @@ local global_bindings = {
 }
 
 if config.features.screenshot_tools then
-    global_bindings = gtable.join(global_bindings, {
+    global_bindings = {
 
         binding.new {
             modifiers = {},
@@ -537,7 +537,7 @@ if config.features.screenshot_tools then
 end
 
 if config.features.wallpaper_menu then
-    global_bindings = gtable.join(global_bindings, {
+    global_bindings = {
 
         binding.new {
             modifiers = { mod.shift, mod.super, mod.control },

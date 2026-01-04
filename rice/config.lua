@@ -1,6 +1,7 @@
 -- DEPENDENCIES (see below)
 
 local core = require("core")
+local awful = require("awful")
 
 
 local config = {}
@@ -24,7 +25,7 @@ config.features = {
 config.places = {}
 config.places.home = os.getenv("HOME")
 config.places.config = os.getenv("XDG_CONFIG_HOME") or (config.places.home .. "/.config")
-config.places.awesome = string.match(gfilesystem.get_configuration_dir(), "^(/?.-)/*$")
+config.places.awesome = string.match(awful.util.get_configuration_dir(), "^(/?.-)/*$")
 config.places.theme = config.places.awesome .. "/theme"
 config.places.screenshots = config.places.home .. "/Pictures/screenshots"
 config.places.wallpapers = config.places.home .. "/Pictures/wallpapers"
