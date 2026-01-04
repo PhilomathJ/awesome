@@ -93,6 +93,25 @@ local global_bindings = {
         on_press = function() capi.awesome.restart() end,
     },
 
+    binding.new {
+        modifiers = { mod.control, mod.super },
+        triggers = "k",
+        path = "Awesome",
+        description = "Check config",
+        on_press = function()
+            awful.spawn.easy_async_with_shell("awesome -k", function(stdout, stderr, reason, exit_code)
+                local title = exit_code == 0 and "✓ Config Valid" or "✗ Config Invalid"
+                local text = stdout .. (stderr ~= "" and "\n" .. stderr or "")
+                require("naughty").notification {
+                    title = title,
+                    text = text,
+                    timeout = 5,
+                    urgency = exit_code == 0 and "normal" or "critical",
+                }
+            end)
+        end,
+    },
+
 
     binding.new {
         modifiers = { mod.alt },
