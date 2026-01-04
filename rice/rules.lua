@@ -41,22 +41,22 @@ end
 
 local my_screens = {}
 
-my_screens.hp = {
-        name = "hp",
+my_screens.dell = {
+    name = "dell",
         display = "DP-0",
-        index = "2"
+    index = "3"
     }
 
 my_screens.asus = {
     name = "asus",
-    display = "DP-4",
-    index = "1"
+    display = "DP-2",
+    index = "2"
 }
     
 my_screens.lenovo = {
         name = "lenovo",
-        display = "DP-2",
-        index = "3"
+    display = "DP-4",
+    index = "1"
 }
 
 ruled.client.connect_signal("request::rules", function()
