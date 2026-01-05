@@ -9,6 +9,7 @@ local services = {
     wallpaper = config.features.wallpaper_menu and require("services.wallpaper") or nil,
     power = require("services.power"),
     media = require("services.media"),
+    screenshot = config.features.screenshot_tools and require("services.screenshot") or nil,
 }
 
 for _, service in pairs(services) do

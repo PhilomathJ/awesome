@@ -507,92 +507,90 @@ local global_bindings = {
 }
 
 if config.features.screenshot_tools then
-    global_bindings = {
-
-        binding.new {
-            modifiers = {},
-            triggers = "Print",
-            path = { "Screenshot", "To Clipboard" },
-            description = "Current monitor",
-            on_press = function() services.screenshot.take { mode = "screen", output = "clipboard" } end,
-        },
-
-        binding.new {
-            modifiers = { mod.super },
-            triggers = "Print",
-            path = { "Screenshot", "To File" },
-            description = "Current monitor",
-            on_press = function() services.screenshot.take { mode = "screen" } end,
-        },
-
-        binding.new {
-            modifiers = { mod.alt },
-            triggers = "Print",
-            path = { "Screenshot", "To Clipboard" },
-            description = "Active window",
-            on_press = function() services.screenshot.take { mode = "window", output = "clipboard" } end,
-        },
-
-        binding.new {
-            modifiers = { mod.shift },
-            triggers = "Print",
-            path = { "Screenshot", "To File" },
-            description = "Active window",
-            on_press = function() services.screenshot.take { mode = "window" } end,
-        },
-
-        binding.new {
-            modifiers = { mod.control, mod.alt },
-            triggers = "Print",
-            path = { "Screenshot", "To Clipboard" },
-            description = "Rectangular selection",
-            on_press = function() services.screenshot.take { mode = "selection", shader = "boxzoom", output = "clipboard" } end,
-        },
-
-        binding.new {
-            modifiers = { mod.control, mod.alt, mod.super },
-            triggers = "Print",
-            path = { "Screenshot", "To File" },
-            description = "Rectangular selection",
-            on_press = function() services.screenshot.take { mode = "selection", shader = "boxzoom" } end,
-        },
-
-        binding.new {
-            modifiers = { mod.alt },
-            triggers = "Print",
-            path = { "Screenshot" },
-            description = "Open the capture launcher",
-            on_press = function() awful.spawn.with_shell("flameshot launcher") end,
-        },
-
-        table.unpack(global_bindings) }
+    -- Current monitor to clipboard
+    table.insert(global_bindings, binding.new {
+        modifiers = {},
+        triggers = "Print",
+        path = { "Screenshot", "To Clipboard" },
+        description = "Current monitor",
+        on_press = function() services.screenshot.take { mode = "screen", output = "clipboard" } end,
+    })
+    -- Current monitor to file
+    table.insert(global_bindings, binding.new {
+        modifiers = { mod.super },
+        triggers = "Print",
+        path = { "Screenshot", "To File" },
+        description = "Current monitor",
+        on_press = function() services.screenshot.take { mode = "screen" } end,
+    })
+    -- Rectangular selection to clipboard
+    table.insert(global_bindings, binding.new {
+        modifiers = { mod.super },
+        triggers = "s",
+        path = { "Screenshot", "To Clipboard" },
+        description = "Rectangular selection",
+        on_press = function() services.screenshot.take { mode = "selection", shader = "boxzoom", output = "clipboard" } end,
+    })
+    -- Rectangular selection to file
+    table.insert(global_bindings, binding.new {
+        modifiers = { mod.super, mod.shift },
+        triggers = "s",
+        path = { "Screenshot", "To File" },
+        description = "Rectangular selection",
+        on_press = function() services.screenshot.take { mode = "selection", shader = "boxzoom" } end,
+    })
+    -- Active window to clipboard
+    table.insert(global_bindings, binding.new {
+        modifiers = { mod.alt },
+        triggers = "Print",
+        path = { "Screenshot", "To Clipboard" },
+        description = "Active window",
+        on_press = function() services.screenshot.take { mode = "window", output = "clipboard" } end,
+    })
+    -- Active window to file
+    table.insert(global_bindings, binding.new {
+        modifiers = { mod.shift },
+        triggers = "Print",
+        path = { "Screenshot", "To File" },
+        description = "Active window",
+        on_press = function() services.screenshot.take { mode = "window" } end,
+    })
+    -- Active window to clipboard (alternative)
+    table.insert(global_bindings, binding.new {
+        modifiers = { mod.control, mod.alt },
+        triggers = "Print",
+        path = { "Screenshot", "To Clipboard" },
+        description = "Active window",
+        on_press = function() services.screenshot.take { mode = "window", output = "clipboard" } end,
+    })
+    -- Active window to file (alternative)
+    table.insert(global_bindings, binding.new {
+        modifiers = { mod.control, mod.super, mod.alt },
+        triggers = "Print",
+        path = { "Screenshot", "To File" },
+        description = "Active window",
+        on_press = function() services.screenshot.take { mode = "window" } end,
+    })
 end
 
 if config.features.wallpaper_menu then
-    global_bindings = {
-
-        binding.new {
-            modifiers = { mod.shift, mod.super, mod.control },
-            triggers = "w",
-            path = "Action",
-            description = "Restore wallpaper",
-            on_press = function() services.wallpaper.restore() end,
-        },
-
-        table.unpack(global_bindings) }
+    table.insert(global_bindings, binding.new {
+        modifiers = { mod.shift, mod.super, mod.control },
+        triggers = "w",
+        path = "Action",
+        description = "Restore wallpaper",
+        on_press = function() services.wallpaper.restore() end,
+    })
 end
 
 if config.features.magnifier_tools then
-    global_bindings = {
-        binding.new {
-            modifiers = { mod.super },
-            triggers = "z",
-            path = "Action",
-            description = "Magnifier",
-            on_press = function() services.magnifier.run() end,
-        },
-
-        table.unpack(global_bindings) }
+    table.insert(global_bindings, binding.new {
+        modifiers = { mod.super },
+        triggers = "z",
+        path = "Action",
+        description = "Magnifier",
+        on_press = function() services.magnifier.run() end,
+    })
 end
 
 return global_bindings

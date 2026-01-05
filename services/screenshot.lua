@@ -72,29 +72,27 @@ function screenshot.take(args)
     local final_message = mode_desc .. " screenshot captured\n" .. output_desc
     local check_selection_cancel = (args.mode == "selection")
 
-    -- Execute screenshot command and show notification only on completion
     awful.spawn.easy_async_with_shell(command, function(stdout, stderr, exitreason, exitcode)
         if exitreason == "exit" and exitcode == 0 then
-            -- Show success notification
             naughty.notification {
-                title = "Screenshot",
+                title = "Screenshot Captured",
                 message = final_message,
                 timeout = 3,
                 urgency = "normal",
             }
         elseif exitcode == 1 and check_selection_cancel then
-            -- Exit code 1 for selection mode usually means user cancelled
-            -- Don't show error notification for cancellation
+            -- This is when user cancels the selection. Don't show error.
         else
-            -- Show failure notification
             naughty.notification {
                 title = "Screenshot Failed",
-                message = "Failed to capture screenshot",
+                message = "Failed to capture screenshot."
+                    .. (stderr and "\n" .. stderr or ""),
                 timeout = 3,
                 urgency = "critical",
             }
         end
     end)
+
 end
 
 return screenshot
