@@ -1,99 +1,93 @@
--- DEPENDENCIES (feature flag "screenshot_tools"): maim, xclip, xdotool, date
-
+-- DEPENDENCIES: maim, xclip, xdotool, date
+local awful = require("awful")
+local naughty = require("naughty")
 local config = require("rice.config")
-if not config.features.screenshot_tools then
-  return
+
+-- Return early if feature is disabled
+if not (config.features and config.features.screenshot_tools) then
+  return {}
 end
 
-local format = string.format
-local awful = require("awful")
-local beautiful = require("theme.theme")
-local tcolor = require("utils.color")
-local places = require("rice.places")
-local naughty = require("naughty")
-
-
 local screenshot = {}
+local format = string.format
+
+-- Helper to get current screen geometry for maim
+local function get_screen_geom()
+  local s = awful.screen.focused()
+  local g = s.geometry
+  return format("--geometry=%dx%d+%d+%d", g.width, g.height, g.x, g.y)
+end
 
 function screenshot.take(args)
   args = args or {}
+  local file_format = args.format or "png"
+  local timestamp = os.date("%Y%m%d-%H%M-%S")
+  local screenshot_dir = config.places and config.places.screenshots or os.getenv("HOME")
 
-  args.format = args.format or "png"
+  -- If args.output is a path (contains /) use it; otherwise generate a timestamped one.
+  local is_literal_path = type(args.output) == "string" and args.output:find("/")
+  local file_path = is_literal_path and args.output or format("%s/%s.%s", screenshot_dir, timestamp, file_format)
 
-  local command = "maim --quiet --hidecursor --format " .. args.format
+  -- Base Command Construction
+  local cmd_parts = { "maim", "--quiet", "--hidecursor", "--format", file_format }
 
-  if args.delay then
-    command = format("%s --delay %.0f", command, args.delay)
-  end
+  if args.delay then table.insert(cmd_parts, format("--delay %.0f", args.delay)) end
+  if args.shader then table.insert(cmd_parts, format("--shader %s", args.shader)) end
 
-  if args.shader then
-    command = format("%s --shader %s", command, args.shader)
-  end
+  -- Mode Table
+  local modes = {
+    ["selection"] = { flag = "--select", desc = "Selection" },
+    ["window"]    = { flag = "--window " .. (args.window or "$(xdotool getactivewindow)"), desc = "Window" },
+    ["display"]   = { flag = "--xdisplay " .. (args.display or ""), desc = "Screen" },
+    ["screen"]    = { flag = get_screen_geom(), desc = "Current monitor" },
+  }
 
-  -- Determine screenshot mode description and build notification message immediately
-  local mode_desc
-  if args.mode == "selection" then
-    command = format("%s --select", command)
-    mode_desc = "Selection"
-  elseif args.mode == "window" then
-    command = format("%s --window %s", command, args.window or "$(xdotool getactivewindow)")
-    mode_desc = "Window"
-  elseif args.mode == "screen" or args.mode == nil then
-    -- Capture only the focused monitor/screen
-    local screen = awful.screen.focused()
-    if screen then
-      local geom = screen.geometry
-      command = format("%s --geometry=%dx%d+%d+%d", command,
-        geom.width, geom.height, geom.x, geom.y)
-    end
-    mode_desc = "Current monitor"
-  elseif args.display then
-    command = format("%s --xdisplay %s", command, args.display)
-    mode_desc = "Screen"
-  end
+  -- Default to "screen" if mode is nil or invalid
+  local selected_mode = modes[args.mode] or modes["screen"]
+  table.insert(cmd_parts, selected_mode.flag)
 
-  -- Determine output destination
-  local output_desc
-  if args.output == "clipboard" then
-    command = format("%s | xclip -selection clipboard -t image/%s", command, args.format)
-    output_desc = "Copied to clipboard"
-  elseif args.output then
-    command = format("%s \"%s\"", command, args.output)
-    output_desc = format("Saved to %s", args.output)
-  else
-    local file_name = "$(date '+%Y%m%d-%H%M-%S')"
-    command = format("%s \"%s/%s.%s\"", command, config.places.screenshots, file_name, args.format)
-    output_desc = "Saved to file"
-  end
+  -- Output Table
+  local outputs = {
+    ["clipboard"] = {
+      flag = format("| xclip -selection clipboard -t image/%s > /dev/null 2>&1 &", file_format),
+      desc = "Copied to clipboard",
+    },
+    ["github"] = {
+      -- Saves to the local repo, then stages and pushes
+      -- Change the path below to the actual local repo location
+      flag = format("\"%s\" && cd %s && git add . && git commit -m 'docs: auto-screenshot %s' && git push",
+        file_path, config.places.homelab_repo or "~/Documents/Homelab", timestamp),
+      desc = "Pushed to Homelab GitHub",
+    },
+    ["remote_storage"] = {
+      -- Saves locally then SCPs to NAS or remote server
+      flag = format("\"%s\" && scp \"%s\" user@192.168.20.222:/mnt/storage/screenshots/", file_path, file_path),
+      desc = "Uploaded to Remote Storage",
+    },
+    ["default"] = {
+      flag = format("\"%s\"", file_path),
+      desc = "Saved to " .. file_path,
+    },
+  }
 
-  -- Create the complete message as a single string immediately
-  local final_message = mode_desc .. " screenshot captured\n" .. output_desc
-  local check_selection_cancel = (args.mode == "selection")
+  local selected_output = outputs[args.output] or outputs["default"]
+  table.insert(cmd_parts, selected_output.flag)
 
-  -- Display final command
-  -- naughty.notification {
-  --   title = "maim command",
-  --   message = command,
-  --   timeout = 20,
-  --   urgency = "normal",
-  -- }
+  -- 4. Execution
+  local command = table.concat(cmd_parts, " ")
+  local notification_msg = format("%s screenshot captured\n%s", selected_mode.desc, selected_output.desc)
 
-  awful.spawn.easy_async_with_shell(command, function(stdout, stderr, exitreason, exitcode)
+  awful.spawn.easy_async_with_shell(command, function(_, stderr, exitreason, exitcode)
     if exitreason == "exit" and exitcode == 0 then
-      naughty.notification {
-        title = "Screenshot Captured",
-        message = final_message,
-        timeout = 3,
-        urgency = "normal",
+      naughty.notify {
+        title = "📸 Screenshot Processed",
+        text = notification_msg,
+        timeout = 5, -- Longer timeout for network uploads
       }
-    elseif exitcode == 1 and check_selection_cancel then
-      -- This is when user cancels the selection. Don't show error.
-    else
-      naughty.notification {
-        title = "Screenshot Failed",
-        message = "Failed to capture screenshot."
-            .. (stderr and "\n" .. stderr or ""),
-        timeout = 3,
+    elseif not (args.mode == "selection" and exitcode == 1) then
+      naughty.notify {
+        title = "❌ Screenshot Failed",
+        text = stderr or "Check terminal for logs",
         urgency = "critical",
       }
     end
