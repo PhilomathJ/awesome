@@ -26,14 +26,20 @@ sudo pacman -S rofi-emoji rofi-calc
 
 > :white_check_mark: **Shortcuts**
 >
-> | keys | description |
-> |:---|:---|
-> | Super + h | Show shortcuts help menu |
-> | Super + Enter | Open terminal |
-> | Super + Shift + ` (backtick) | Close client |
-> | Alt + Space | Rofi Launcher |
+> | keys                         | description              |
+> | :--------------------------- | :----------------------- |
+> | Super + h                    | Show shortcuts help menu |
+> | Super + Enter                | Open terminal            |
+> | Super + Shift + ` (backtick) | Close client             |
+> | Alt + Space                  | Rofi Launcher            |
 
 [my-awesome-repo]: https://github.com/PhilomathJ/awesome
 [kosorin-rice-repo]: https://github.com/PhilomathJ/awesome-rice-kosorin
 [awesomewm-repo]: https://github.com/PhilomathJ/awesome_source
 [my-rofi-repo]: https://github.com/PhilomathJ/rofi
+
+## ToDo's
+
+- [x] Fix screenshots with `maim`
+- [ ] Configure screen brightness utlility
+- [ ] Configure color temerature utility
