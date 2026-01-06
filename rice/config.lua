@@ -14,12 +14,12 @@ local config = {}
 ---@field redshift_widget boolean?
 ---@field wallpaper_menu boolean?
 config.features = {
-    screenshot_tools = true,
-    magnifier_tools = false,
-    torrent_widget = false,
-    weather_widget = false,
-    redshift_widget = true,
-    wallpaper_menu = false,
+  screenshot_tools = true,
+  magnifier_tools = false,
+  torrent_widget = false,
+  weather_widget = false,
+  redshift_widget = true,
+  wallpaper_menu = false,
 }
 
 config.places = {}
@@ -31,44 +31,44 @@ config.places.screenshots = config.places.home .. "/Pictures/screenshots"
 config.places.wallpapers = config.places.home .. "/Pictures/wallpapers"
 
 config.wm = {
-    name = "awesome",
+  name = "awesome",
 }
 
 local terminal = "alacritty"
 local terminal_execute = terminal .. " -e "
 
 config.apps = {
-    shell = "zsh",
-    terminal = terminal,
-    editor = terminal_execute .. "nano",
-    browser = "brave",
-    private_browser = "brave --incognito",
-    file_manager = "dolphin",
-    calculator = "qalculate-gtk",
-    mixer = terminal_execute .. "pulsemixer",
-    bluetooth_control = terminal_execute .. "bluetoothctl",
+  shell = "zsh",
+  terminal = terminal,
+  editor = terminal_execute .. "nano",
+  browser = "brave",
+  private_browser = "brave --incognito",
+  file_manager = "dolphin",
+  calculator = "qalculate-gtk",
+  mixer = terminal_execute .. "pulsemixer",
+  bluetooth_control = terminal_execute .. "bluetoothctl",
 }
 
 config.power = {
-    shutdown = "systemctl poweroff",
-    reboot = "systemctl reboot",
-    suspend = "systemctl suspend",
-        kill_session = "loginctl kill-session ''",
-    lock_session = "loginctl lock-session",
-    lock_screen = "light-locker-command --lock",
+  shutdown = "systemctl poweroff",
+  reboot = "systemctl reboot",
+  suspend = "systemctl suspend",
+  kill_session = "loginctl kill-session ''",
+  lock_session = "loginctl lock-session",
+  lock_screen = "light-locker-command --lock",
 }
 
 config.actions = {
-    qr_code_clipboard = "qrclip",
-    show_launcher = "rofi -show drun",
-    show_emoji_picker = "ibus emoji",
-    -- show_emoji_picker = config.places.config .. "/rofi/emoji-run.sh",
+  qr_code_clipboard = "qrclip",
+  show_launcher = "rofi -show drun",
+  show_emoji_picker = "ibus emoji",
+  -- show_emoji_picker = config.places.config .. "/rofi/emoji-run.sh",
 }
 
 config.commands = {}
 
 function config.commands.open(path)
-    return "xdg-open \"" .. path .. "\""
+  return "xdg-open \"" .. path .. "\""
 end
 
 

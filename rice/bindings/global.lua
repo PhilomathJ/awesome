@@ -155,7 +155,7 @@ local global_bindings = {
     },
 
     binding.new {
-        modifiers = {mod.super},
+    modifiers = { mod.super },
         triggers = key.scrolllock,
         path = "Launcher",
         description = "Calculator",
